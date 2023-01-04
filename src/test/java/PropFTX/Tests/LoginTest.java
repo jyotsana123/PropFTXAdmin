@@ -18,24 +18,21 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginTest extends BaseTest {
 
-	@Test
+	@Test(priority=1)
 	public void wrongEmailPassword() throws InterruptedException {
-		lp.openWebsite();
 		lp.enterEmailPassword("nishu@yopmail.com", "Test@123");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getPopup(), "Invalid Email or Password");
 	}
 
-	@Test
+	@Test(priority=3)
 	public void checkPasswordVisibility() {
-		lp.openWebsite();
 		lp.enterEmailPassword("nishu@yopmail.com", "Test@123");
 		lp.checkPasswordVisibility();
 	}
 
-	@Test
+	@Test(priority=0)
 	public void withoutEmailPassword() {
-		lp.openWebsite();
 		lp.enterEmailPassword("", "");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getEmailError(), "Please enter Email id");
@@ -43,43 +40,46 @@ public class LoginTest extends BaseTest {
 
 	}
 
-	@Test
+	@Test(priority=4)
 	public void validEmailPassword() throws InterruptedException {
-		lp.openWebsite();
+		//lp.openWebsite();
 		lp.enterEmailPassword("rahul.agarwal@mail.vinove.com", "Admin@123");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getPopup(), "You have successfully logged in!");
 	}
 
-	@Test
+	@Test(priority=2)
 	public void InvalidEmail() {
-		lp.openWebsite();
 		lp.enterEmailPassword("admin", "Admin@123");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getEmailError(), "Please enter a valid email id");
 	}
 
-	@Test
+	@Test(priority=7)
 	public void forgotPasswordEmailNotExist() {
-		lp.openWebsite();
 		lp.clickOnForgotPassword();
 		lp.enterEmail("admin@admin.com");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getPopup(), "Email not found !");
 	}
 
-	@Test
+	@Test(priority=6)
 	public void forgotPasswordInvaliEmail() {
-		lp.openWebsite();
 		lp.clickOnForgotPassword();
 		lp.enterEmail("admin");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getEmailError(), "Please enter a valid email id");
 	}
+	
+	@Test(priority=5)
+	public void forgotPasswordWithoutEmail() {
+		lp.clickOnForgotPassword();
+		lp.clickOnSubmit();
+		Assert.assertEquals(lp.getEmailError(), "Please enter Email id");
+	}
 
-	@Test
+	@Test(priority=8)
 	public void forgotPasswordEmailExist() {
-		lp.openWebsite();
 		lp.clickOnForgotPassword();
 		lp.enterEmail("rahul.agarwal@mail.vinove.com");
 		lp.clickOnSubmit();

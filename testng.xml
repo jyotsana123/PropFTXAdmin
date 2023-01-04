@@ -3,7 +3,10 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="PropFTX.Tests.Login"/>
+      <class name="PropFTX.Tests.LoginTest"/>
+     <!-- --> <class name="PropFTX.Tests.UMTableTest"/>
+     <!-- --> <class name="PropFTX.Tests.SearchUserTest"/>
+     <!-- --> <class name="PropFTX.Tests.AddUserTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
