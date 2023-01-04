@@ -5,7 +5,7 @@
     <classes>
       <class name="PropFTX.Tests.LoginTest">
         <methods>
-          <include name="validEmailPassword"/>
+          <include name="wrongEmailPassword"/>
           <include name="launchWebsite"/>
         </methods>
       </class> <!-- PropFTX.Tests.LoginTest -->

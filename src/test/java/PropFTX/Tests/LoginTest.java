@@ -18,75 +18,72 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginTest extends BaseTest {
 
-//	public static void main(String[] args) throws InterruptedException {
-	//@Test
+	@Test
 	public void wrongEmailPassword() throws InterruptedException {
 		lp.openWebsite();
 		lp.enterEmailPassword("nishu@yopmail.com", "Test@123");
-		Thread.sleep(2000);
-		String attribute1 = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div/div/div/div/div/div[2]/div/form/div[2]/div[2]/input")).getAttribute("type");
-		System.out.println(attribute1);
-		driver.findElement(By.cssSelector("svg[stroke='currentColor']")).click();
-		String attribute2 = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div/div/div/div/div/div[2]/div/form/div[2]/div[2]/input")).getAttribute("type");
-		System.out.println(attribute2);
-		Assert.assertEquals(attribute2, "text");
 		lp.clickOnSubmit();
-		Thread.sleep(2000);
-		//System.out.println(driver.findElement(By.cssSelector(".mr-2")).getText());
-		//lp.getPopup();
+		Assert.assertEquals(lp.getPopup(), "Invalid Email or Password");
 	}
 
-	//@Test
+	@Test
+	public void checkPasswordVisibility() {
+		lp.openWebsite();
+		lp.enterEmailPassword("nishu@yopmail.com", "Test@123");
+		lp.checkPasswordVisibility();
+	}
+
+	@Test
 	public void withoutEmailPassword() {
 		lp.openWebsite();
 		lp.enterEmailPassword("", "");
 		lp.clickOnSubmit();
+		Assert.assertEquals(lp.getEmailError(), "Please enter Email id");
+		Assert.assertEquals(lp.getPasswordError(), "Please enter Password");
+
 	}
-	
+
 	@Test
-	public void validEmailPassword() throws InterruptedException
-	{
+	public void validEmailPassword() throws InterruptedException {
 		lp.openWebsite();
-		lp.enterEmailPassword("admin@admin.com", "Admin@123");
+		lp.enterEmailPassword("rahul.agarwal@mail.vinove.com", "Admin@123");
 		lp.clickOnSubmit();
-		lp.getPopup();
-		Assert.assertEquals(lp.getPopup(), "You have successfully logged in!");	
+		Assert.assertEquals(lp.getPopup(), "You have successfully logged in!");
 	}
-	
-	//@Test
-	public void InvalidEmail()
-	{
+
+	@Test
+	public void InvalidEmail() {
 		lp.openWebsite();
 		lp.enterEmailPassword("admin", "Admin@123");
-		//driver.findElement(By.cssSelector("svg[stroke='currentColor']")).click();
 		lp.clickOnSubmit();
-		//lp.getPopup();
-		System.out.println(driver.findElement(By.cssSelector(".invalid-feedback")).getText());
-		Assert.assertTrue(true, "Please enter a valid email id");
+		Assert.assertEquals(lp.getEmailError(), "Please enter a valid email id");
 	}
-	
-	//@Test
-	public void forgotPassword()
-	{
+
+	@Test
+	public void forgotPasswordEmailNotExist() {
 		lp.openWebsite();
 		lp.clickOnForgotPassword();
 		lp.enterEmail("admin@admin.com");
 		lp.clickOnSubmit();
-		//lp.getPopup();
-		Assert.assertTrue(true, "Password reset link sent on your registered email id");
-		
+		Assert.assertEquals(lp.getPopup(), "Email not found !");
 	}
-	
-	//@Test
-	public void forgotPasswordInvaliEmail()
-	{
+
+	@Test
+	public void forgotPasswordInvaliEmail() {
 		lp.openWebsite();
 		lp.clickOnForgotPassword();
 		lp.enterEmail("admin");
 		lp.clickOnSubmit();
-		System.out.println(driver.findElement(By.cssSelector(".invalid-feedback")).getText());
-		Assert.assertTrue(true, "Please enter a valid email id");
-		
+		Assert.assertEquals(lp.getEmailError(), "Please enter a valid email id");
 	}
-	
+
+	@Test
+	public void forgotPasswordEmailExist() {
+		lp.openWebsite();
+		lp.clickOnForgotPassword();
+		lp.enterEmail("rahul.agarwal@mail.vinove.com");
+		lp.clickOnSubmit();
+		Assert.assertEquals(lp.getPopup(), "Password reset link sent on your registered email id");
+	}
+
 }
