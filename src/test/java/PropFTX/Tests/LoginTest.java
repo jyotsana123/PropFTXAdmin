@@ -43,7 +43,7 @@ public class LoginTest extends BaseTest {
 	@Test(priority=4)
 	public void validEmailPassword() throws InterruptedException {
 		//lp.openWebsite();
-		lp.enterEmailPassword("rahul.agarwal@mail.vinove.com", "Admin@123");
+		lp.enterEmailPassword("jyotsana.pandey@mail.vinove.com", "Admin@123");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getPopup(), "You have successfully logged in!");
 	}
@@ -81,7 +81,7 @@ public class LoginTest extends BaseTest {
 	@Test(priority=8)
 	public void forgotPasswordEmailExist() {
 		lp.clickOnForgotPassword();
-		lp.enterEmail("rahul.agarwal@mail.vinove.com");
+		lp.enterEmail("jyotsana.pandey@mail.vinove.com");
 		lp.clickOnSubmit();
 		Assert.assertEquals(lp.getPopup(), "Password reset link sent on your registered email id");
 	}

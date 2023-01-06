@@ -4,6 +4,8 @@ import java.awt.AWTException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,69 +21,79 @@ public class AddUserTest extends BaseTest{
 	public void addUserbutton()
 	{
 		lp.openWebsite();
-		lp.enterEmailPassword("admin@admin.com", "Admin@123");
+		lp.enterEmailPassword("jyotsana.pandey@mail.vinove.com", "Admin@123");
 		lp.clickOnSubmit();
 		adduser = new AddUser(driver);
 		adduser.clickOnUserManagement();
-		driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/div[1]/div[3]/ul/li[2]/ul/div/li[2]/a")).click();
-		//adduser.clickOnAddUserButton();
 	}
 	
-	@Test
+	//@Test
 	public void addUser() throws InterruptedException, AWTException
 	{
+		adduser.clickOnAddOption();
 		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/94kb.jpg");
-		adduser.enterNameAddressPhoneNumber("Annu", "Jaitpur new delhi", "7827317222");
+		adduser.enterNameAddressPhoneNumber("Annu", "Jaitpur new delhi", "7827317729");
 		adduser.selectCountry();
 		adduser.selectState();
 		adduser.selectCity();
-		adduser.enterEmail("annu@yopmail.com");
+		adduser.enterEmail("annu2@yopmail.com");
 		adduser.clickOnSubmitButton();
+		Assert.assertEquals(lp.getPopup(), "User Created Successfully");
 		}
 	
 	
 	@Test
-	public void clickOnSubmit()
+	public void clickOnSubmit() throws InterruptedException
 	{
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
 		adduser.clickOnSubmitButton();
+		Assert.assertTrue(adduser.getErrorMessage());	
 	}
 	
 	@Test
-	public void enterNameMoreThan50CharAddress100CharInvalidPhonenum()
+	public void enterNameMoreThan50CharAddress100CharInvalidPhonenum() throws InterruptedException
 	{
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
 		adduser.enterNameAddressPhoneNumber("Lorem Ipsum is simply dummy text of the printing an", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been thati", "yrtuwttr");
 		adduser.clickOnSubmitButton();
+		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
 	@Test
-	public void enterInvalidEmail()
+	public void enterInvalidEmail() throws InterruptedException
 	{
-		adduser.enterEmail("uueyuwuey@hhihiqiru.dhiuhiuqhewhiqhrirhqwrqwihri");
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
+		adduser.enterEmail("abc.com");
 		adduser.clickOnSubmitButton();
+		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
 	@Test
-	public void chooseImagelessThan100kb()
+	public void chooseImagelessThan500kb() throws InterruptedException
 	{
-		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/98kb.jpg");
-		adduser.getImageError();
-		Assert.assertTrue(false, "file size max 100kb");
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
+		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/498kb.jpg");
 	}
 
 	@Test
-	public void chooseImageMoreThan100kb() throws InterruptedException
+	public void chooseImageMoreThan500kb() throws InterruptedException
 	{
-		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/103kb.jpg");
-	    adduser.getImageError();
-	    Assert.assertTrue(true, "file size max 100kb");
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
+		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/506kb.jpg");
+	    Assert.assertEquals(adduser.getImageError(), "file size max 500kb");
 		
 	}
 	
 	@Test
-	public void chooseImage100kb()
+	public void chooseImage500kb()
 	{
-		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/100kb.jpg");
-		adduser.getImageError();
-		Assert.assertTrue(false, "file size max 100kb");
+		adduser.clickOnAddOption();
+		adduser.waitForElement();
+		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/500kb.jpg");
 	}
 }

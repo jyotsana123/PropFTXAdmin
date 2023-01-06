@@ -15,16 +15,16 @@ public class SearchUserTest extends BaseTest{
 	public void Search()
 	{
 		lp.openWebsite();
-		lp.enterEmailPassword("admin@admin.com", "Admin@123");
+		lp.enterEmailPassword("jyotsana.pandey@mail.vinove.com", "Admin@123");
 		lp.clickOnSubmit();
 		AddUser adduser = new AddUser(driver);
 		adduser.clickOnUserManagement();
 		searchuser = new SearchUser(driver);
+		searchuser.clickOnListOption();
 }
 	@Test
 	public void searchByUserName()
 	{
-		
 		searchuser.enterName("Test");
 	}
 	
@@ -35,11 +35,16 @@ public class SearchUserTest extends BaseTest{
 	}
 	
 	@Test
+	public void searchByPhoneNumber()
+	{	
+		searchuser.enterPhoneNumber("9582402076");
+	}
+	
+	@Test
 	public void searchByInvalidData()
 	{
 		searchuser.enterInvalidData("bjbhj564455@$@$@");
-		//System.out.println(driver.findElement(By.cssSelector(".sc-iveFHk.gHqiHO div")).getText());
-		Assert.assertTrue(true, "There are no records to display");
+		Assert.assertEquals(searchuser.getNoResultText(), "There are no records to display");
 	}
 	
 	

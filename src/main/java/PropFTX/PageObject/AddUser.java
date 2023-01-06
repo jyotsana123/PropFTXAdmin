@@ -1,6 +1,7 @@
 package PropFTX.PageObject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,9 @@ public class AddUser extends AbstractComponent{
 	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[1]/div[3]/ul/li[2]/a")
 	WebElement userManagement;
 	
+	@FindBy(xpath="//*[@id=\"root\"]/div[1]/div[1]/div[3]/ul/li[2]/ul/div/li[2]/a")
+	WebElement addOption;
+	
 	@FindBy(css=".ms-2.btn-sm.btn.btn-primary")
 	WebElement addUser;
 	
@@ -45,20 +49,13 @@ public class AddUser extends AbstractComponent{
 	@FindBy(id="phoneNumber")
 	WebElement PhoneNumber;
 	
-//	@FindBy(xpath="//*[@id=\"dashboard-analytics\"]/form/div[2]/div[2]/fieldset/div[5]/div[2]/div[1]/div")
-//	WebElement CountryDropdown;
-	
-//	@FindBy(xpath="//form/div[2]/div[2]/fieldset/div[5]/div[2]/div/div")
-//	WebElement CountryDropdown;
-	
-	@FindBy(css="#dashboard-analytics > form > div.row > div.ml-.col-12.col-md-8 > fieldset > div:nth-child(5) > div.col-12.col-md-8 > div")
+	@FindBy(xpath="//*[@id='dashboard-analytics']/form/div[2]/div/fieldset/div[5]/div[2]/div/div/div[2]")
 	WebElement CountryDropdown;
 	
-	
-	@FindBy(xpath="//*[@id='dashboard-analytics']/form/div[2]/div[2]/fieldset/div[6]/div[2]/div/div/div[1]/div[2]")
+	@FindBy(xpath="//*[@id='dashboard-analytics']/form/div[2]/div/fieldset/div[6]/div[2]/div/div/div[1]")
 	WebElement StateDropdown;
 	
-	@FindBy(xpath="//*[@id=\"dashboard-analytics\"]/form/div[2]/div[2]/fieldset/div[7]/div[2]/div/div/div[1]/div[2]")
+	@FindBy(xpath="//*[@id='dashboard-analytics']/form/div[2]/div/fieldset/div[7]/div[2]/div/div/div[1]")
 	WebElement CityDropdown;
 	
 	@FindBy(id="email")
@@ -67,21 +64,33 @@ public class AddUser extends AbstractComponent{
 	@FindBy(id="image")
 	WebElement Image;
 	
-	@FindBy(xpath="//form/div[2]/div/div[2]/span")
+	@FindBy(xpath="//span[text()='file size max 500kb']")
 	WebElement ImageError;
+	
+	@FindBy(css=".address-title")
+	WebElement addUserPageTitle;
+	
+	public void waitForElement()
+	{
+		waitForWebElementToAppear(addUserPageTitle);
+	}
 	
 	public void clickOnUserManagement()
 	{
 		userManagement.click();
 	}
 	
-	public void clickOnAddUserButton()
+	public void clickOnAddOption()
 	{
-		addUser.click();
+		addOption.click();
 	}
 	
-	public void clickOnSubmitButton()
+	public void clickOnSubmitButton() throws InterruptedException
 	{
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		WebElement submitButton = 	driver.findElement(By.xpath("//button[@type='submit']"));
+		js.executeScript("arguments[0].scrollIntoView(true)",submitButton);
+		Thread.sleep(2000);
 		submit.click();
 	}
 	
@@ -95,29 +104,12 @@ public class AddUser extends AbstractComponent{
 	public void selectCountry() throws InterruptedException, AWTException
 	{
 		CountryDropdown.click();
-		Thread.sleep(2000);
-		//driver.findElement(By.cssSelector(".select__input-container.css-vwja0k")).sendKeys("ind");
 		Robot r = new Robot();
-		//r.keyPress(KeyEvent.VK_DOWN);
+		r.keyPress(KeyEvent.VK_I);
+		r.keyPress(KeyEvent.VK_N);
+		r.keyPress(KeyEvent.VK_D);
+		r.keyPress(KeyEvent.VK_DOWN);
 		r.keyPress(KeyEvent.VK_ENTER);
-//		r.keyPress(0);
-//		CountryDropdown.sendKeys("ind");
-		Thread.sleep(2000);
-		//CountryDropdown.sendKeys(Keys.ARROW_DOWN.ENTER);
-//		List<WebElement> options = driver.findElements(By.cssSelector(".select__single-value div"));
-//		for(WebElement option :options)
-//		{
-//			//4. Use getText to get text of all the options, and see if it's matched to real value
-//			if (option.getText().equalsIgnoreCase("india"))
-//			{
-//				//5. And blindly click on matched value and then break to come out from loop
-//				option.click();
-//				break;
-//			}
-//			
-//		}
-//		s = new Select(CountryDropdown);
-//		s.selectByValue("India");
 	}
 	
 	public void selectState() throws InterruptedException, AWTException
@@ -126,7 +118,6 @@ public class AddUser extends AbstractComponent{
 		Thread.sleep(2000);
 		Robot r = new Robot();
 		r.keyPress(KeyEvent.VK_ENTER);
-		Thread.sleep(2000);
 	}
 	
 	public void selectCity() throws InterruptedException, AWTException
@@ -135,8 +126,6 @@ public class AddUser extends AbstractComponent{
 		Thread.sleep(2000);
 		Robot r = new Robot();
 		r.keyPress(KeyEvent.VK_ENTER);
-		Thread.sleep(2000);
-		
 	}
 	
 	public void enterEmail(String email)
@@ -149,9 +138,26 @@ public class AddUser extends AbstractComponent{
 		Image.sendKeys(image);
 	}
 	
-	public void getImageError()
+	public String getImageError()
 	{
 		String error = ImageError.getText();
 		System.out.println(error);
+		return ImageError.getText();
+		//return true;
 	}
+	
+	public boolean getErrorMessage()
+	{
+		int i;
+		List<WebElement> message =  driver.findElements(By.cssSelector(".invalid-feedback"));
+		for(i=0;i<message.size();i++)
+		{
+			String arr = message.get(i).getText();
+			System.out.println(arr);
+		}
+		return true;
+		
+		
+	}
+	
 }

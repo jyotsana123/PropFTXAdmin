@@ -3,12 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="PropFTX.Tests.LoginTest">
+      <class name="PropFTX.Tests.SearchUserTest">
         <methods>
-          <include name="wrongEmailPassword"/>
+          <include name="searchByInvalidData"/>
           <include name="launchWebsite"/>
+          <include name="Search"/>
+          <include name="closeBrowser"/>
         </methods>
-      </class> <!-- PropFTX.Tests.LoginTest -->
+      </class> <!-- PropFTX.Tests.SearchUserTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
