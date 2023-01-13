@@ -1,6 +1,10 @@
 package PropFTX.Tests;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,21 +27,24 @@ public class SearchUserTest extends BaseTest{
 		searchuser.clickOnListOption();
 }
 	@Test
-	public void searchByUserName()
+	public void searchByUserName() throws InterruptedException
 	{
 		searchuser.enterName("Test");
+		searchuser.printName();
 	}
 	
 	@Test
 	public void searchByEmail()
 	{	
 		searchuser.enterEmail("@yopmail.com");
+		searchuser.printEmail();
 	}
 	
 	@Test
 	public void searchByPhoneNumber()
 	{	
 		searchuser.enterPhoneNumber("9582402076");
+		searchuser.printPhoneNumber();
 	}
 	
 	@Test

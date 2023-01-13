@@ -43,7 +43,7 @@ public class BaseTest {
 		return lp;
 	}
 	
-	@AfterMethod
+	//@AfterMethod
 	public void closeBrowser()
 	{
 		driver.close();

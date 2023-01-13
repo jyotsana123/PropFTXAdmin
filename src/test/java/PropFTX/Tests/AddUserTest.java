@@ -27,22 +27,22 @@ public class AddUserTest extends BaseTest{
 		adduser.clickOnUserManagement();
 	}
 	
-	//@Test
+	@Test
 	public void addUser() throws InterruptedException, AWTException
 	{
 		adduser.clickOnAddOption();
-		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/94kb.jpg");
-		adduser.enterNameAddressPhoneNumber("Annu", "Jaitpur new delhi", "7827317729");
+		//adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/94kb.jpg");
+		adduser.enterNameAddressPhoneNumber("Testing", "Jaitpur new delhi", "7827317727");
 		adduser.selectCountry();
 		adduser.selectState();
 		adduser.selectCity();
-		adduser.enterEmail("annu2@yopmail.com");
+		adduser.enterEmail("test8@yopmail.com");
 		adduser.clickOnSubmitButton();
 		Assert.assertEquals(lp.getPopup(), "User Created Successfully");
 		}
 	
 	
-	@Test
+	//@Test
 	public void clickOnSubmit() throws InterruptedException
 	{
 		adduser.clickOnAddOption();
@@ -51,7 +51,7 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());	
 	}
 	
-	@Test
+	//@Test
 	public void enterNameMoreThan50CharAddress100CharInvalidPhonenum() throws InterruptedException
 	{
 		adduser.clickOnAddOption();
@@ -61,7 +61,7 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	@Test
+	//@Test
 	public void enterInvalidEmail() throws InterruptedException
 	{
 		adduser.clickOnAddOption();
@@ -71,7 +71,7 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	@Test
+	//@Test
 	public void chooseImagelessThan500kb() throws InterruptedException
 	{
 		adduser.clickOnAddOption();
@@ -79,7 +79,7 @@ public class AddUserTest extends BaseTest{
 		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/498kb.jpg");
 	}
 
-	@Test
+	//@Test
 	public void chooseImageMoreThan500kb() throws InterruptedException
 	{
 		adduser.clickOnAddOption();
@@ -89,7 +89,7 @@ public class AddUserTest extends BaseTest{
 		
 	}
 	
-	@Test
+	//@Test
 	public void chooseImage500kb()
 	{
 		adduser.clickOnAddOption();

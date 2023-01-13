@@ -21,6 +21,14 @@ public class Table{
 	@FindBy(css="div[class*='table-bordered']")
 	WebElement Table;
 	
+	@FindBy(xpath=("//*[@id=\"root\"]/div[1]/div[1]/div[3]/ul/li[2]/ul/div/li[1]/a"))
+	WebElement listOption;
+	
+	public void clickOnList()
+	{
+		listOption.click();
+	}
+	
 //	@FindBy(css="div[role='row']")
 //	WebElement Row;
 //	
@@ -37,4 +45,8 @@ public class Table{
 		System.out.println("Total no. of coloumns " +  Table.findElements(By.cssSelector("div[role='columnheader']")).size());
 	}
 	
+	public void getTotalRecords()
+	{
+	System.out.println("Total no. of recodrs are " +driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText().split(" ")[2]);
+	}
 }
