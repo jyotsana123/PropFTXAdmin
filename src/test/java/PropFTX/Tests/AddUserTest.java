@@ -25,13 +25,13 @@ public class AddUserTest extends BaseTest{
 		lp.clickOnSubmit();
 		adduser = new AddUser(driver);
 		adduser.clickOnUserManagement();
+		adduser.clickOnAddOption();
 	}
 	
-	@Test
+	
+	@Test(priority=6)
 	public void addUser() throws InterruptedException, AWTException
 	{
-		adduser.clickOnAddOption();
-		//adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/94kb.jpg");
 		adduser.enterNameAddressPhoneNumber("Testing", "Jaitpur new delhi", "7827317727");
 		adduser.selectCountry();
 		adduser.selectState();
@@ -42,58 +42,53 @@ public class AddUserTest extends BaseTest{
 		}
 	
 	
-	//@Test
+	@Test(priority=0)
 	public void clickOnSubmit() throws InterruptedException
 	{
-		adduser.clickOnAddOption();
 		adduser.waitForElement();
 		adduser.clickOnSubmitButton();
 		Assert.assertTrue(adduser.getErrorMessage());	
 	}
 	
-	//@Test
+	@Test(priority=1)
 	public void enterNameMoreThan50CharAddress100CharInvalidPhonenum() throws InterruptedException
 	{
-		adduser.clickOnAddOption();
 		adduser.waitForElement();
 		adduser.enterNameAddressPhoneNumber("Lorem Ipsum is simply dummy text of the printing an", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been thati", "yrtuwttr");
 		adduser.clickOnSubmitButton();
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	//@Test
+	@Test(priority=2)
 	public void enterInvalidEmail() throws InterruptedException
 	{
-		adduser.clickOnAddOption();
 		adduser.waitForElement();
 		adduser.enterEmail("abc.com");
 		adduser.clickOnSubmitButton();
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	//@Test
+	@Test(priority=4)
 	public void chooseImagelessThan500kb() throws InterruptedException
 	{
-		adduser.clickOnAddOption();
 		adduser.waitForElement();
 		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/498kb.jpg");
 	}
 
-	//@Test
+	@Test(priority=3)
 	public void chooseImageMoreThan500kb() throws InterruptedException
 	{
-		adduser.clickOnAddOption();
 		adduser.waitForElement();
 		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/506kb.jpg");
 	    Assert.assertEquals(adduser.getImageError(), "file size max 500kb");
 		
 	}
 	
-	//@Test
+	@Test(priority=5)
 	public void chooseImage500kb()
 	{
-		adduser.clickOnAddOption();
+		//adduser.clickOnAddOption();
 		adduser.waitForElement();
-		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/500kb.jpg");
+		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/500kb.png");
 	}
 }

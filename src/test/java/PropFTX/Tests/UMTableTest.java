@@ -40,13 +40,10 @@ public class UMTableTest extends BaseTest {
 
 	}
 
-	// @Test
+	//@Test
 	public void getRowColoumnCount() {
 		table.getRowCount();
 		table.getColoumnCount();
-//		WebElement table = driver.findElement(By.cssSelector("div[class*='table-bordered']"));
-//		System.out.println(table.findElements(By.cssSelector("div[role='row']")).size());
-//		System.out.println(table.findElements(By.cssSelector("div[role='columnheader']")).size());
 	}
 
 	// @Test
@@ -124,7 +121,7 @@ public class UMTableTest extends BaseTest {
 		table.getTotalRecords();		
 	}
 	
-	@Test
+//	@Test
 	public void clickOnNextPage() throws InterruptedException
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -149,14 +146,9 @@ public class UMTableTest extends BaseTest {
 				System.out.println(array);
 			}
 		}
-		
-//		else
-//		{
-//			System.out.println("not click on next page");
-//		}
 	}
 	
-	@Test(dependsOnMethods="clickOnNextPage()")
+	//@Test(dependsOnMethods="clickOnNextPage()")
 	public void clickOnPreviousPage() throws InterruptedException
 	{
 //		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -176,7 +168,7 @@ public class UMTableTest extends BaseTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void previouspagearrowClick() throws InterruptedException
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -198,6 +190,35 @@ public class UMTableTest extends BaseTest {
 		{
 			driver.findElement(By.cssSelector("button[aria-label='previous page']")).click();
 			a.sendKeys(Keys.PAGE_DOWN).build().perform();
+			System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
+			index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+		}
+		
+		
+	}
+	@Test
+	public void previouspagearrowClick2() throws InterruptedException
+	{
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,800)");
+		Thread.sleep(2000);
+		String index = driver.findElement(By.cssSelector("button[aria-label='next page']")).getAttribute("tabindex");
+		while(index.equalsIgnoreCase("0"))
+		{
+			driver.findElement(By.cssSelector("button[aria-label='next page']")).click();
+			System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
+			index = driver.findElement(By.cssSelector("button[aria-label='next page']")).getAttribute("tabindex");
+		}
+		Thread.sleep(2000);
+//		Actions a = new Actions(driver);
+//		a.sendKeys(Keys.PAGE_UP).build().perform();
+//		Thread.sleep(2000);
+		String index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+		while(index2.equalsIgnoreCase("0"))
+		{
+			driver.findElement(By.cssSelector("button[aria-label='previous page']")).click();
+			Thread.sleep(2000);
+			//a.sendKeys(Keys.PAGE_DOWN).build().perform();
 			System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
 			index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
 		}

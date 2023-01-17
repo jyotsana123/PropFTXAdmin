@@ -26,28 +26,28 @@ public class SearchUserTest extends BaseTest{
 		searchuser = new SearchUser(driver);
 		searchuser.clickOnListOption();
 }
-	@Test
+	@Test(priority=0)
 	public void searchByUserName() throws InterruptedException
 	{
 		searchuser.enterName("Test");
 		searchuser.printName();
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void searchByEmail()
 	{	
 		searchuser.enterEmail("@yopmail.com");
 		searchuser.printEmail();
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void searchByPhoneNumber()
 	{	
 		searchuser.enterPhoneNumber("9582402076");
 		searchuser.printPhoneNumber();
 	}
 	
-	@Test
+	@Test(priority=3)
 	public void searchByInvalidData()
 	{
 		searchuser.enterInvalidData("bjbhj564455@$@$@");

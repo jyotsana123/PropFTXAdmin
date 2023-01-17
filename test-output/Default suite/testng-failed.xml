@@ -5,7 +5,7 @@
     <classes>
       <class name="PropFTX.Tests.UMTableTest">
         <methods>
-          <include name="previouspagearrowClick"/>
+          <include name="previouspagearrowClick2"/>
           <include name="launchWebsite"/>
           <include name="table"/>
         </methods>
