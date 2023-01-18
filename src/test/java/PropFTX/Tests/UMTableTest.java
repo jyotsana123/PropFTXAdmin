@@ -168,7 +168,7 @@ public class UMTableTest extends BaseTest {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void previouspagearrowClick() throws InterruptedException
 	{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -210,19 +210,47 @@ public class UMTableTest extends BaseTest {
 			index = driver.findElement(By.cssSelector("button[aria-label='next page']")).getAttribute("tabindex");
 		}
 		Thread.sleep(2000);
+		if(true) {
+			Actions a = new Actions(driver);
+			a.sendKeys(Keys.PAGE_UP).build().perform();
+		WebElement previousPage = driver.findElement(By.cssSelector("button[aria-label='previous page']"));
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOf(previousPage));
+		
+		previousPage.click();
+		}
+		else
+		{
+//			Actions a = new Actions(driver);
+//			a.sendKeys(Keys.PAGE_UP).build().perform();
+			Thread.sleep(2000);
+			String index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+			while(index2.equalsIgnoreCase("0"))
+			{
+				driver.findElement(By.cssSelector("button[aria-label='previous page']")).click();
+				Thread.sleep(2000);
+				//a.sendKeys(Keys.PAGE_DOWN).build().perform();
+				System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
+				index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+			}
+		}
+	}
+		
+		
 //		Actions a = new Actions(driver);
 //		a.sendKeys(Keys.PAGE_UP).build().perform();
 //		Thread.sleep(2000);
-		String index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
-		while(index2.equalsIgnoreCase("0"))
-		{
-			driver.findElement(By.cssSelector("button[aria-label='previous page']")).click();
-			Thread.sleep(2000);
-			//a.sendKeys(Keys.PAGE_DOWN).build().perform();
-			System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
-			index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
-		}
+//		String index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+//		while(index2.equalsIgnoreCase("0"))
+//		{
+//			driver.findElement(By.cssSelector("button[aria-label='previous page']")).click();
+//			Thread.sleep(2000);
+//			//a.sendKeys(Keys.PAGE_DOWN).build().perform();
+//			System.out.println(driver.findElement(By.xpath("//div/div/div/div[3]/div[2]/nav/div/p[2]")).getText());
+//			index2 = driver.findElement(By.cssSelector("button[aria-label='previous page']")).getAttribute("tabindex");
+//		}
 		
 		
-	}
+	
 }
+

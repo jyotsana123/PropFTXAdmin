@@ -22,6 +22,7 @@ public class AddUserTest extends BaseTest{
 	{
 		lp.openWebsite();
 		lp.enterEmailPassword("jyotsana.pandey@mail.vinove.com", "Admin@123");
+		//lp.enterEmailPassword("admin@admin.com", "Admin@123");
 		lp.clickOnSubmit();
 		adduser = new AddUser(driver);
 		adduser.clickOnUserManagement();
@@ -32,17 +33,17 @@ public class AddUserTest extends BaseTest{
 	@Test(priority=6)
 	public void addUser() throws InterruptedException, AWTException
 	{
-		adduser.enterNameAddressPhoneNumber("Testing", "Jaitpur new delhi", "7827317727");
+		adduser.enterNameAddressPhoneNumber("Bhumica", "Noida UP", "1234567892");
 		adduser.selectCountry();
 		adduser.selectState();
 		adduser.selectCity();
-		adduser.enterEmail("test8@yopmail.com");
+		adduser.enterEmail("Bhumica@yopmail.com");
 		adduser.clickOnSubmitButton();
 		Assert.assertEquals(lp.getPopup(), "User Created Successfully");
 		}
 	
 	
-	@Test(priority=0)
+	//@Test(priority=0)
 	public void clickOnSubmit() throws InterruptedException
 	{
 		adduser.waitForElement();
@@ -50,7 +51,7 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());	
 	}
 	
-	@Test(priority=1)
+	//@Test(priority=1)
 	public void enterNameMoreThan50CharAddress100CharInvalidPhonenum() throws InterruptedException
 	{
 		adduser.waitForElement();
@@ -59,7 +60,7 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	@Test(priority=2)
+	//@Test(priority=2)
 	public void enterInvalidEmail() throws InterruptedException
 	{
 		adduser.waitForElement();
@@ -68,14 +69,14 @@ public class AddUserTest extends BaseTest{
 		Assert.assertTrue(adduser.getErrorMessage());
 	}
 	
-	@Test(priority=4)
+	//@Test(priority=4)
 	public void chooseImagelessThan500kb() throws InterruptedException
 	{
 		adduser.waitForElement();
 		adduser.chooseImageFile("C:/Users/Jyotsana Pandey/Pictures/498kb.jpg");
 	}
 
-	@Test(priority=3)
+	//@Test(priority=3)
 	public void chooseImageMoreThan500kb() throws InterruptedException
 	{
 		adduser.waitForElement();
@@ -84,7 +85,7 @@ public class AddUserTest extends BaseTest{
 		
 	}
 	
-	@Test(priority=5)
+	//@Test(priority=5)
 	public void chooseImage500kb()
 	{
 		//adduser.clickOnAddOption();

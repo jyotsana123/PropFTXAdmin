@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="PropFTX.Tests.UMTableTest">
+      <class name="PropFTX.Tests.UserAction">
         <methods>
-          <include name="previouspagearrowClick2"/>
+          <include name="deleteParticularData"/>
+          <include name="Search"/>
           <include name="launchWebsite"/>
-          <include name="table"/>
         </methods>
-      </class> <!-- PropFTX.Tests.UMTableTest -->
+      </class> <!-- PropFTX.Tests.UserAction -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
