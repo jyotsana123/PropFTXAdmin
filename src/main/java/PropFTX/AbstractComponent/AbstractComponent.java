@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractComponent {
 
-	private static final String String = null;
+	//private static final String String = null;
 	WebDriver driver;
 	public AbstractComponent(WebDriver driver)
 	{
